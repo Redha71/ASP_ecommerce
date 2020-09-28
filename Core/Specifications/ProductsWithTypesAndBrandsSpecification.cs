@@ -16,7 +16,7 @@ namespace Core.Specifications
         {
             AddInclude(x => x.ProductType);
             AddInclude(x => x.ProductBrand);
-            AddOrderByDescending(x => x.Id);
+            AddOrderBy(x => x.Name);
             ApplyPaging(productParams.PageSize * (productParams.PageIndex -1),
             productParams.PageSize);
             if(!string.IsNullOrEmpty(productParams.Sort)){
@@ -28,11 +28,12 @@ namespace Core.Specifications
                     case "priceDesc":
                         AddOrderByDescending(p => p.Price);
                         break;
-                    case "nameAZ":
-                        AddOrderBy(p => p.Name);
-                        break;
-                    default:
+                    case "new":
                         AddOrderByDescending(x => x.Id);
+                        break;
+
+                    default:
+                        AddOrderBy(x => x.Name);
                         break;
                 }
             }
