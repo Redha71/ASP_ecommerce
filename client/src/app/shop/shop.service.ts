@@ -5,6 +5,7 @@ import { IPagination } from '../shared/models/pagination';
 import { IType } from '../shared/models/productType';
 import {map} from 'rxjs/operators';
 import { ShopParams } from '../shared/models/shopParams';
+import { IProduct } from '../shared/models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,6 @@ export class ShopService {
 
   constructor(private http: HttpClient) { }
 
-  // tslint:disable-next-line: typedef
   getProducts(shopParams: ShopParams) {
     let params = new HttpParams();
 
@@ -41,11 +41,14 @@ export class ShopService {
       );
   }
 
-  // tslint:disable-next-line: typedef
+  getProduct(id: number){
+    return this.http.get<IProduct>(this.baseUrl + 'product/' + id);
+  }
+
   getBrands(){
     return this.http.get<IBrand[]>(this.baseUrl + 'product/brands');
   }
-  // tslint:disable-next-line: typedef
+
   getTypes(){
     return this.http.get<IType[]>(this.baseUrl + 'product/types');
   }
